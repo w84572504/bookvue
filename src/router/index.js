@@ -27,7 +27,8 @@ const routes = [
     path: '/index',
     component: HomeIndex,
     meta: {
-      islogin: true
+      islogin: true,
+      title: "左巷"
     },
     children:[
       {
@@ -35,7 +36,9 @@ const routes = [
         name: 'index',
         component:Index,
         meta: {
-          islogin: true
+          islogin: true,
+          title: "左巷"
+
         },
       },
       {
@@ -43,7 +46,8 @@ const routes = [
         name: 'story',
         component:Stroy,
         meta: {
-          islogin: true
+          islogin: true,
+          title: "故事"
         },
       },
       {
@@ -51,7 +55,8 @@ const routes = [
         name: 'rember',
         component:Rember,
         meta: {
-          islogin: true
+          islogin: true,
+          title: "记录"
         },
       },
     ],
@@ -68,7 +73,8 @@ const routes = [
         name: 'index',
         component:About,
         meta: {
-          islogin: true
+          islogin: true,
+          title: "关于你"
         },
       }
     ]
@@ -112,7 +118,9 @@ router.beforeEach((to, from, next) => {
   }else{
     if (to.matched.some(r => r.meta.islogin)) {
       if (store.state.Authorization) {
-        console.log(store.state);
+        if(to.meta.title) {
+          document.title = to.meta.title
+        }
         next();
       } else {
         next({

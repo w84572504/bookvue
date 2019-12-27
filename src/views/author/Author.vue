@@ -25,7 +25,7 @@
           this._getOpen(code);
         }else{
           //1.先获取默认跳转的code
-          this._getUrl(this.redirect,0)
+          this._getUrl(this.redirect,1)
         }
       }
     },
@@ -37,8 +37,8 @@
           console.log(res);
           if (res.code == 200){
             if (res.msg.status == 1){
-              this.token = res.msg.token.access_token;
-              this.alogin(res.msg.token.access_token)
+              let  token = "Bearer " + res.msg.token
+              this.alogin(token)
               this.$router.replace('/')
             }else{
               //授权页面登录
@@ -51,17 +51,10 @@
       _getUrl(reurl,type){
         getUrl(reurl,type).then(res=>{
           if (res.code == 200){
-            alert(res.msg.url)
             location.href = res.msg.url;
-          }else{
-
           }
-
         })
       },
-      _getCode(){
-
-      }
     }
 
   }
