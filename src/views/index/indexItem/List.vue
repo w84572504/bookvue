@@ -10,33 +10,25 @@
             <p class="li-tit" style="color: #20a8ff;" :ref="'more'+v.id" @click="loadMore(v.id)">显示全文 ></p>
             <div style="clear: both"></div>
             <span class="li-btn">
-              <van-icon name="replay" color="#C7C7C7" size="1.4rem" class="li-icon"/>
-              <van-icon name="share" @click="share(v.id)" color="#C7C7C7" size="1.4rem" class="li-icon"/>
-              <van-icon name="paid" color="#C7C7C7" size="1.4rem" class="li-icon"/>
-              <van-icon :name="getIcon(v.zan)" :color="getColor(v.zan)" size="1.4rem" class="li-icon"/>
+              <zan :zan="v.zan" :id="v.id"></zan>
             </span>
           </van-col>
         </van-row>
         <hline></hline>
       </li>
     </ul>
-    <van-popup
-            v-model="show"
-            round
-            position="bottom"
-            :style="{ height: '30%' }"
-    />
   </div>
 </template>
 
 <script>
   import Hline from "./Hline";
-  import wx from 'weixin-js-sdk';
+  import Zan from "./Zan"
+
   export default {
     name: "List",
     components:{
       Hline,
-      wx
+      Zan
     },
     props:{
       list:Array,
@@ -49,12 +41,7 @@
       }
     },
     methods:{
-      getIcon(zan){
-        return zan == 1 ? "good-job" :"good-job-o";
-      },
-      getColor(zan){
-        return zan == 1 ? "#ffa98d" :"#C7C7C7";
-      },
+
       loadMore(id){
         let ids = 'text'+id;
         let mores = 'more'+id;
@@ -66,9 +53,8 @@
           this.$refs[mores][0].innerHTML='收起'
         }
       },
-      share(id){
-        this.show = true;
-      }
+
+
     }
   }
 </script>
@@ -99,7 +85,5 @@
   .li-btn{
     float: right;
   }
-  .li-icon{
-    padding-left: 10px;
-  }
+
 </style>

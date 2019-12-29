@@ -8,7 +8,6 @@
     </van-swipe>
     <hline></hline>
     <list :list="list"></list>
-    <tab-bar :active="active"></tab-bar>
   </div>
 </template>
 
@@ -28,7 +27,7 @@
     },
     data() {
       return {
-        active: "index",
+        active: "0",
         banner:"",
         time:"",
         data:[],

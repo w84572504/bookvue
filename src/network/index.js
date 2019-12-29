@@ -8,6 +8,7 @@ export function getIndex() {
   }
   return request(headCode)
 }
+
 export function getList(id) {
   let data ={'id':id}
   let headCode = {
@@ -17,4 +18,15 @@ export function getList(id) {
   }
   return request(headCode)
 }
+
+export function changeZan(id,status) {
+  let data ={'id':id ,'status':status}
+  let headCode = {
+    url: 'api/changezan',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
 

@@ -1,20 +1,100 @@
 <template>
   <div>
     记录
-    <tab-bar :active="active"></tab-bar>
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
+    记录<br/>
   </div>
 </template>
 
 <script>
-  import tabBar from "components/tabBar";
   export default {
     name: "Rember",
     components:{
-      tabBar
     },
     data() {
       return {
-        active: "rember"
+        active: "2"
       }
     }
   }

@@ -13,9 +13,10 @@ export function getUrl(reurl,type) {
   }
   return request(headCode)
 }
-export function getOpen(code) {
+export function getOpen(code,yid) {
   let params = {
     "code": code,
+    'yid':yid
   }
   let headCode = {
     url: 'api/getopenid',

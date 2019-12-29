@@ -1,7 +1,6 @@
 <template>
   <div>
     故事
-    <tab-bar :active="active"></tab-bar>
   </div>
 </template>
 
@@ -14,7 +13,7 @@
     },
     data() {
       return {
-        active: "story"
+        active: "1"
       }
     }
   }

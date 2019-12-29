@@ -3,12 +3,12 @@
     <van-row justify="center" type="flex" class="top">
       <van-col span="22" class="top-box">
         <van-row>
-          <van-col span="16">
+          <van-col span="15">
             <ul class="index_list">
               <li v-for="(v,i) in data" :key="i" :class="isActive(i)" @click="changeList(i,v.id)">{{v.name}}</li>
             </ul>
           </van-col>
-          <van-col span="5"><p class="time tnum">{{time}}</p></van-col>
+          <van-col span="6"><p class="time tnum">{{time}}</p></van-col>
           <van-col span="3"><p class="time ttext">更新</p></van-col>
         </van-row>
       </van-col>

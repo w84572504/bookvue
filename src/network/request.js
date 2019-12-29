@@ -11,11 +11,14 @@ export function request(config) {
     },
   })
   instace.interceptors.request.use(config => { //请求拦截
-    Toast.loading({
-      message: '加载中...',
-      forbidClick: true,
-      loadingType: 'spinner'
-    });
+    console.log(config.url);
+    if (config.url != "api/changezan"){
+      Toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        loadingType: 'spinner'
+      });
+    }
     // store.commit('showLoading');
     let str = {};
     if (config.method === 'get' && config.params !== undefined){
@@ -35,7 +38,7 @@ export function request(config) {
   instace.interceptors.response.use(res => { //响应拦截
     // store.commit('hideLoading')
     Toast.clear()
-    if (res.data.status == -2){
+    if (res.data.status == 100){
       store.commit('logout')
     }
     return res.data

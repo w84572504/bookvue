@@ -10,10 +10,7 @@ const HomeIndex = () => import('views/index/Home');
 const Index = () => import('views/index/Index');
 const Stroy = () => import('views/index/Story');
 const Rember = () => import('views/index/Rember');
-
-
-const About = () => import('views/about/Index');
-const AboutHome = () => import('views/about/Home');
+const About = () => import('views/index/About');
 
 const Weixin = () => import('views/weixin/Index');
 const Author = () => import('views/author/Author');
@@ -51,33 +48,24 @@ const routes = [
         },
       },
       {
-        path:'rember',
+        path: 'rember',
         name: 'rember',
-        component:Rember,
+        component: Rember,
         meta: {
           islogin: true,
           title: "记录"
         },
       },
-    ],
-  },
-  {
-    path: '/about',
-    component: AboutHome,
-    meta: {
-      islogin: false
-    },
-    children:[
       {
-        path:'index',
-        name: 'index',
+        path:'about',
+        name: 'about',
         component:About,
         meta: {
           islogin: true,
           title: "关于你"
         },
-      }
-    ]
+      },
+    ],
   },
   {
     path: '/weixin',
