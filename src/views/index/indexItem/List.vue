@@ -10,7 +10,7 @@
             <p class="li-tit" style="color: #20a8ff;" :ref="'more'+v.id" @click="loadMore(v.id)">显示全文 ></p>
             <div style="clear: both"></div>
             <span class="li-btn">
-              <zan :zan="v.zan" :id="v.id"></zan>
+              <zan :info="v"></zan>
             </span>
           </van-col>
         </van-row>

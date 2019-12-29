@@ -4,14 +4,13 @@ import store from 'store/index'
 import { Toast } from 'vant';
 export function request(config) {
   const instace = axios.create({
-    baseURL : 'http://www.baicaiec.com/',
+    baseURL : 'http://admin.baicaiec.com/',
     timeout : 5000,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
   })
   instace.interceptors.request.use(config => { //请求拦截
-    console.log(config.url);
     if (config.url != "api/changezan"){
       Toast.loading({
         message: '加载中...',

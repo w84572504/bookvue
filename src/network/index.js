@@ -29,4 +29,14 @@ export function changeZan(id,status) {
   return request(headCode)
 }
 
+export function wxconfig(url) {
+  let data ={'url':url }
+  let headCode = {
+    url: 'api/wxconfig',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
 

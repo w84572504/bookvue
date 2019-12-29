@@ -42,7 +42,6 @@
       _getIndex(){
         getIndex().then(res=>{
         if (res.code == 200){
-          console.log(res.msg);
           this.time = res.msg.time;
           this.banner = res.msg.banner;
           this.data = res.msg.list;
@@ -56,8 +55,8 @@
       _getList(id){
         getList(id).then(res=>{
           if (res.code == 200){
-            console.log(res);
             let arr = res.msg.data
+            console.log(arr);
             if (arr.length != 0){
               arr.map( item => {
                 this.list.push(item);
