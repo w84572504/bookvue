@@ -92,6 +92,9 @@
     name: "Rember",
     components:{
     },
+    mounted() {
+
+    },
     data() {
       return {
         active: "2"

@@ -4,5 +4,8 @@ export default{
   },
   getUserInfo:(state)=>{
     return state.user
+  },
+  getToken:(state)=>{
+    return state.Authorization
   }
 }

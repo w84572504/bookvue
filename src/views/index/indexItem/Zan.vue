@@ -1,32 +1,27 @@
 <template>
     <div>
-        <van-icon name="replay" color="#C7C7C7" size="1.4rem" class="li-icon"/>
-        <van-icon name="share" @click="share(id)" color="#C7C7C7" size="1.4rem" class="li-icon" />
-        <van-icon name="paid" color="#C7C7C7" size="1.4rem" class="li-icon"/>
-        <van-icon :name="getIcon(status)" :color="getColor(status)" size="1.4rem" class="li-icon" @click="changeZan(status,id)"/>
-        <van-popup v-model="show" round position="bottom" :style="{ height: '20%' }" >
-            <van-row justify="center" type="flex" class="list-li">
-                <van-col span="20" class="top-box">
-                <van-grid :border="false" class="libtn" >
-                    <van-grid-item icon="chat-o" text="微信" @click="pengyou()"/>
-                    <van-grid-item icon="photo-o" text="朋友圈" @click="quan()"/>
-                    <van-grid-item icon="photo-o" text="复制链接" @click="copy()"/>
-                    <van-grid-item icon="photo-o" text="生成海报" />
-                </van-grid>
-                </van-col>
-                <button class="noshow" @click="show = false">取消</button>
-            </van-row>
+        <span class="iconfont icon-getwx li-icons" ></span>
+        <span class="iconfont icon-share li-icons" @click="showImg(info)"></span>
+        <span class="iconfont icon-haibao li-icons" ></span>
+        <span class="iconfont  li-icons" :class="getIcon(status)" :style=" getColor(status)" @click="changeZan(status,id)"></span>
+<!--        <van-icon :name="" :color="" size="1.4rem" class="li-icon" />-->
+        <van-popup v-model="show" class="tanchuang" style="background: none;">
+            <img width="250" :src="img">
+            <p class="tanchuangp">温馨提示：每邀请一个好友可获得左钻，将此码群发好友或转发到朋友圈可有更大几率获得左钻</p>
+            <p class="baocun" @click="baocun">
+                <img src="~assets/img/baocun.png" width="50px" alt=""><br>
+                <span>长按图片保存到本地</span>
+            </p>
         </van-popup>
+
     </div>
 </template>
 
 <script>
-    import {changeZan,wxconfig} from "network";
-    import wx from 'weixin-js-sdk';
+    import {changeZan,getShareImg} from "network";
     export default {
         name: "Zan",
         comments:{
-            wx,
         },
         props:{
             info:Object,
@@ -35,88 +30,89 @@
             return{
                 status:this.info.zan,
                 id:this.info.id,
-                show:false
+                show:false,
+                img:""
             }
         },
         created(){
-            WeixinJSBridge.call(‘hideOptionMenu’);
         },
         methods:{
             getIcon(status){
-                return status == 1 ? "good-job" :"good-job-o";
+                return status == 1 ? "icon-zan-on" :"icon-zan";
             },
             getColor(status){
-                return status == 1 ? "#ffa98d" :"#C7C7C7";
+                return status == 1 ? "color:#ffa98d" :"";
             },
             changeZan(status,id){
                 this.status = status == 1 ? 0 : 1;
                 changeZan(id,this.status).then()
             },
-            share(id){
-                this.show = true;
-            },
-            _weconfig(){
-                console.log(this.info);
-                let url =  location.href
-                wxconfig(url).then(res=>{
-                    wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                        appId: res.msg.data.appId, // 必填，公众号的唯一标识
-                        timestamp: res.msg.data.timestamp, // 必填，生成签名的时间戳
-                        nonceStr: res.msg.data.nonceStr, // 必填，生成签名的随机串
-                        signature:  res.msg.data.signature,// 必填，签名
-                        jsApiList: ['updateAppMessageShareData','updateTimelineShareData','checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo'] // 必填，需要使用的JS接口列表
-                    });
+            showImg(info){
+                console.log(info);
+                let that = this
+                getShareImg(info.id,info.title,info.description).then(res=>{
+                    if (res.code == 200){
+                        that.img = res.msg.img
+                        that.show = true;
+                    }else{
+                        this.$toast("生成失败！")
+                    }
                 })
             },
-            pengyou(){
-                // this._weconfig()
-                console.log(WeixinJSBridge);
-                this.weixinShareTimeline("23",'123','www.baicaiec.com','')
-                // wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-                //     wx.updateAppMessageShareData({
-                //         title: this.info.title, // 分享标题
-                //         desc: this.info.description, // 分享描述
-                //         link: 'www.baicaiec.com/index', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                //         imgUrl: '', // 分享图标
-                //         success: function () {
-                //             // 设置成功
-                //             console.log('分享成功');
-                //         }
-                //     })
-                // });
+            downloadIamge(imgsrc, name) {//下载图片地址和图片名
+                var image = new Image();
+                // 解决跨域 Canvas 污染问题
+                image.setAttribute("crossOrigin", "anonymous");
+                image.onload = function() {
+                    var canvas = document.createElement("canvas");
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    var context = canvas.getContext("2d");
+                    context.drawImage(image, 0, 0, image.width, image.height);
+                    var url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
+                    var a = document.createElement("a"); // 生成一个a元素
+                    var event = new MouseEvent("click"); // 创建一个单击事件
+                    a.download = name || "photo"; // 设置图片名称
+                    a.href = url; // 将生成的URL设置为a.href属性
+                    a.dispatchEvent(event); // 触发a的单击事件
+                };
+                image.src = imgsrc;
             },
-            quan(){
-                this._weconfig()
-                // wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-                //     wx.updateTimelineShareData({
-                //         title: this.info.title, // 分享标题
-                //         link: 'www.baicaiec.com/index', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                //         imgUrl: '', // 分享图标
-                //         success: function () {
-                //             // 设置成功
-                //             console.log('分享成功2');
-                //         }
-                //     })
-                // });
-            },
-            weixinShareTimeline(title,desc,link,imgUrl){
-                WeixinJSBridge.invoke('menu:share:appmessage',{
-                    "img_url":imgUrl,
-                    "link":link,
-                    "desc": desc,
-                    "title":title
-                });
-            },
+            baocun(){
+                this.downloadIamge(this.img, 'pic')
+            }
         }
     }
 </script>
 
 <style scoped>
     .li-icon{
-        margin-left: 10px;
+        margin-top: -5px;
     }
-    .libtn{
+    .li-icons{
+
+        font-size: 20px;
+        color: #C7C7C7;
+        margin-left: 12px;
+    }
+    .tanchuang{
+        background-color: none;
+    }
+    .tanchuangp{
+        color: #fff;
+        font-size: 10px;
+        line-height: 18px;
+        text-align: center;
+        padding: 12px 10px;
+    }
+    .baocun{
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+    }
+    .baocun span{
+        line-height: 30px;
     }
     .noshow{
         width: 100%;

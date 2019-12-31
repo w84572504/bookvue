@@ -39,4 +39,31 @@ export function wxconfig(url) {
   return request(headCode)
 }
 
+export function getShareImg(id,title,content) {
+  let data ={'aid':id,'title':title,'text':content}
+  let headCode = {
+    url: 'api/shareimg',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+export function uInfo() {
+  let headCode = {
+    url: 'api/uinfo',
+    method: 'post',
+  }
+  return request(headCode)
+}
+
+export function getMore(id) {
+  let data ={'id':id}
+  let headCode = {
+    url: 'api/getmore',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
 

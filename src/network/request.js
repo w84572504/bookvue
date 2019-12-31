@@ -2,6 +2,7 @@ import axios from 'axios'
 import store from 'store/index'
 
 import { Toast } from 'vant';
+
 export function request(config) {
   const instace = axios.create({
     baseURL : 'http://admin.baicaiec.com/',
@@ -12,13 +13,14 @@ export function request(config) {
   })
   instace.interceptors.request.use(config => { //请求拦截
     if (config.url != "api/changezan"){
+      store.commit('showLoading');
       Toast.loading({
         message: '加载中...',
         forbidClick: true,
         loadingType: 'spinner'
       });
     }
-    // store.commit('showLoading');
+
     let str = {};
     if (config.method === 'get' && config.params !== undefined){
       str =config.params
@@ -29,20 +31,21 @@ export function request(config) {
     }
     return config
     },err => {
-    // store.commit('hideLoading')
+
+    store.commit('hideLoading')
     Toast.clear()
     return Promise.reject(err)
     })
 
   instace.interceptors.response.use(res => { //响应拦截
-    // store.commit('hideLoading')
+    store.commit('hideLoading')
     Toast.clear()
-    if (res.data.status == 100){
+    if (res.data.code == 100 || res.data.code == 101){
       store.commit('logout')
     }
     return res.data
     }, err =>{
-    // store.commit('hideLoading')
+    store.commit('hideLoading')
     Toast.clear()
     console.log(err)
   })

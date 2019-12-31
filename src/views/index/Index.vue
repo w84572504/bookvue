@@ -7,12 +7,11 @@
       </van-swipe-item>
     </van-swipe>
     <hline></hline>
-    <list :list="list"></list>
+    <list :list="list" :onid="onid" ></list>
   </div>
 </template>
 
 <script>
-  import tabBar from "components/tabBar";
   import topLi from "./indexItem/topLi";
   import List from "./indexItem/List";
   import Hline from "./indexItem/Hline";
@@ -21,7 +20,6 @@
     name: "Index",
     components:{
       List,
-      tabBar,
       topLi,
       Hline,
     },
@@ -32,8 +30,12 @@
         time:"",
         data:[],
         onid:0,
-        list:[]
+        list:[],
       }
+    },
+    mounted() {
+      this.$wxShare('',()=>{
+      })
     },
     created(){
       this._getIndex()
@@ -55,8 +57,7 @@
       _getList(id){
         getList(id).then(res=>{
           if (res.code == 200){
-            let arr = res.msg.data
-            console.log(arr);
+            let arr = res.msg.data;
             if (arr.length != 0){
               arr.map( item => {
                 this.list.push(item);

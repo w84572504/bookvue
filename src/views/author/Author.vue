@@ -44,6 +44,7 @@
           if (res.code == 200){
             if (res.msg.status == 1){
               let  token = "Bearer " + res.msg.token
+              console.log(token);
               this.alogin(token)
               this.$router.replace(urlarr[0])
             }else{
