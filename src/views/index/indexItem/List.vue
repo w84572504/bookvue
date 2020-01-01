@@ -35,7 +35,38 @@
               <button class="alertbtn surepay" @click="getMore()">确认</button>
             </van-col>
             <van-col span="12" >
-              <button class="alertbtn feepay" >免费获取</button>
+              <button class="alertbtn feepay" @click="gorechage()">免费获取</button>
+            </van-col>
+          </van-row>
+
+        </div>
+      </div>
+    </van-popup>
+    <van-popup v-model="showok">
+      <div  class="alertpay">
+        <p class="ptit">支付成功</p>
+        <p class="midcon"><span class="iconfont icon-chenggong " ></span></p>
+        <div style="clear: both"></div>
+        <div class="ftbtn">
+          <van-row justify="center" type="flex" class="list-li">
+            <van-col span="12" >
+              <button class="alertbtn surepay" @click="showoks()">继续阅读</button>
+            </van-col>
+          </van-row>
+
+        </div>
+      </div>
+    </van-popup>
+    <van-popup v-model="showerr">
+      <div  class="alertpay">
+        <p class="ptit">支付失败</p>
+        <p class="midcon"><span class="iconfont icon-shibai " ></span></p>
+        <p class="errmsg">{{errmsg}}</p>
+        <div style="clear: both"></div>
+        <div class="ftbtn">
+          <van-row justify="center" type="flex" class="list-li">
+            <van-col span="12" >
+              <button class="alertbtn feepay" @click="gorechage()">免费获取</button>
             </van-col>
           </van-row>
 
@@ -57,7 +88,7 @@
     },
     props:{
       list:Array,
-      onid:Number,
+      id:Number,
 
     },
     data(){
@@ -65,8 +96,14 @@
         arr:this.list,
         score:0,
         show:false,
+        showok:false,
+        showerr:false,
         payscore:0,
+        errmsg:"",
       }
+    },
+    created(){
+      console.log(this.arr);
     },
     methods:{
 
@@ -94,15 +131,24 @@
       },
       getMore(){
         let that = this;
-        getMore(that.onid).then(res=>{
+        getMore(that.id).then(res=>{
           if (res.code ==200){
             that.arr.push(res.msg.data);
             that.show = false;
+            that.showok = true;
           }else{
             that.show = false;
-            this.$toast(res.msg);
+            that.showerr = true;
+            that.errmsg = res.msg;
+            // this.$toast(res.msg);
           }
         })
+      },
+      showoks(){
+        this.showok = false;
+      },
+      gorechage(){
+        this.$router.push('/index/about/rechage')
       }
 
 
@@ -162,6 +208,9 @@
     text-align: center;
     padding-top: 10px;
   }
+  .midcon span{
+    font-size: 100px;
+  }
   .xzuan{
     float: right;
     margin-top: -35px;
@@ -196,5 +245,10 @@
     width:100px;
     height:36px;
     background-color: #40D9BE;
+  }
+  .errmsg{
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
   }
 </style>

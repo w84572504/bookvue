@@ -3,13 +3,15 @@
     <van-row justify="center" type="flex" class="top">
       <van-col span="22" class="top-box">
         <van-row>
-          <van-col span="15">
+          <van-col :span="row">
             <ul class="index_list">
               <li v-for="(v,i) in data" :key="i" :class="isActive(i)" @click="changeList(i,v.id)">{{v.name}}</li>
             </ul>
           </van-col>
-          <van-col span="6"><p class="time tnum">{{time}}</p></van-col>
-          <van-col span="3"><p class="time ttext">更新</p></van-col>
+          <slot name="gengxin">
+
+          </slot>
+
         </van-row>
       </van-col>
     </van-row>
@@ -27,7 +29,8 @@
     props:{
       data:Array,
       onid:Number,
-      time:String
+      time:String,
+      row:Number
 
     },
     methods:{
@@ -55,7 +58,7 @@
   .index_list li {
     float: left;
     font-size: 16px;
-    margin: 0  5px;
+    margin: 0  10px;
     font-family:PingFangSC-Light,PingFang SC;
     font-weight:300;
     color:#605C5C;
@@ -69,19 +72,5 @@
     border-bottom: 3px solid #3BD7BB;
     border-radius: 3px;
   }
-  .time{
-    padding-top: 20px;
-    font-size:15px;
-    font-family:PingFangSC-Semibold,PingFang SC;
-    font-weight:600;
-    color:rgba(37,31,31,1);
-  }
-  .tnum{
-    font-size:28px;
-    font-family:Impact;
-    line-height: 28px;
-  }
-  .ttext{
-    line-height: 28px;
-  }
+
 </style>

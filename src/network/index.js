@@ -9,6 +9,22 @@ export function getIndex() {
   return request(headCode)
 }
 
+export function getRember() {
+  let headCode = {
+    url: 'api/rember',
+    method: 'post',
+  }
+  return request(headCode)
+}
+
+export function getStory() {
+  let headCode = {
+    url: 'api/story',
+    method: 'post',
+  }
+  return request(headCode)
+}
+
 export function getList(id) {
   let data ={'id':id}
   let headCode = {
@@ -51,6 +67,14 @@ export function getShareImg(id,title,content) {
 export function uInfo() {
   let headCode = {
     url: 'api/uinfo',
+    method: 'post',
+  }
+  return request(headCode)
+}
+
+export function getuser() {
+  let headCode = {
+    url: 'api/getuser',
     method: 'post',
   }
   return request(headCode)
