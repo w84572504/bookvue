@@ -26,6 +26,13 @@ function isWeiXin() {
         return false;
     }
 }
+
+function inArray(val, arr) {
+  return arr.some(function (v) {
+    return val === v;
+  })
+}
+
 export default {
-  checkPhone,debounce,isWeiXin
+  checkPhone,debounce,isWeiXin,inArray
 }

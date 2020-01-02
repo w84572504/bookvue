@@ -20,7 +20,7 @@
 }
 
 body {
-
+  font-family: PingFangSC-Regular ;
   user-select: none; /*禁止用户鼠标选中文字图标*/
   -webkit-tap-highlight-color: transparent;/* webkit 是苹果浏览器引擎 tap点击 highlight背景高龄 color颜色，颜色用数值调节*/
   background:var(--color-background);

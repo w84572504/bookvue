@@ -64,6 +64,17 @@ export function getShareImg(id,title,content) {
   }
   return request(headCode)
 }
+
+export function getShareImgs() {
+  let data ={'suiji':1};
+  let headCode = {
+    url: 'api/shareimgs',
+    method: 'post',
+    data: Qs.stringify(data)
+  };
+  return request(headCode)
+}
+
 export function uInfo() {
   let headCode = {
     url: 'api/uinfo',
@@ -89,5 +100,45 @@ export function getMore(id) {
   }
   return request(headCode)
 }
+
+export function upImg(img) {
+  let data ={'img':img};
+  let headCode = {
+    url: 'api/upimg',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
+export function editname(name) {
+  let data ={'name':name};
+  let headCode = {
+    url: 'api/editname',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
+export function rechagelist() {
+  let headCode = {
+    url: 'api/rechagelist',
+    method: 'post',
+  }
+  return request(headCode)
+}
+
+export function payMoney(id,type) {
+  let data ={'id':id,'type':type};
+  let headCode = {
+    url: 'api/payMoney',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
+
 
 

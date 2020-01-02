@@ -8,7 +8,7 @@
         <van-popup v-model="show" class="tanchuang" style="background: none;">
             <img width="250" :src="img">
             <p class="tanchuangp">温馨提示：每邀请一个好友可获得左钻，将此码群发好友或转发到朋友圈可有更大几率获得左钻</p>
-            <p class="baocun" @click="baocun">
+            <p class="baocun" >
                 <img src="~assets/img/baocun.png" width="50px" alt=""><br>
                 <span>长按图片保存到本地</span>
             </p>
@@ -48,7 +48,6 @@
                 changeZan(id,this.status).then()
             },
             showImg(info){
-                console.log(info);
                 let that = this
                 getShareImg(info.id,info.title,info.description).then(res=>{
                     if (res.code == 200){
@@ -59,28 +58,6 @@
                     }
                 })
             },
-            downloadIamge(imgsrc, name) {//下载图片地址和图片名
-                var image = new Image();
-                // 解决跨域 Canvas 污染问题
-                image.setAttribute("crossOrigin", "anonymous");
-                image.onload = function() {
-                    var canvas = document.createElement("canvas");
-                    canvas.width = image.width;
-                    canvas.height = image.height;
-                    var context = canvas.getContext("2d");
-                    context.drawImage(image, 0, 0, image.width, image.height);
-                    var url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
-                    var a = document.createElement("a"); // 生成一个a元素
-                    var event = new MouseEvent("click"); // 创建一个单击事件
-                    a.download = name || "photo"; // 设置图片名称
-                    a.href = url; // 将生成的URL设置为a.href属性
-                    a.dispatchEvent(event); // 触发a的单击事件
-                };
-                image.src = imgsrc;
-            },
-            baocun(){
-                this.downloadIamge(this.img, 'pic')
-            }
         }
     }
 </script>

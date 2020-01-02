@@ -218,7 +218,7 @@
   }
   .sheng{
     font-size:16px;
-    font-family:PingFangSC-Light,PingFang SC;
+    font-family:PingFangSC-Regular,PingFang SC;
     float: right;
     color: #C7C7C7;
     padding-right: 10px;
@@ -231,7 +231,7 @@
   .alertbtn{
     border:none;
     color: #fff;
-    font-family: PingFangSC-Light;
+    font-family: PingFangSC-Regular;
     font-size: 16px;
     border-radius:4px;
   }

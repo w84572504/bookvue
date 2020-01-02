@@ -71,21 +71,6 @@
     width: 100%;
     height: 200px;
   }
-  .time{
-    padding-top: 20px;
-    font-size:15px;
-    font-family:PingFangSC-Semibold,PingFang SC;
-    font-weight:600;
-    color:rgba(37,31,31,1);
-  }
-  .tnum{
-    font-size:28px;
-    font-family:Impact;
-    line-height: 28px;
-  }
-  .ttext{
-    line-height: 28px;
-  }
   .topli{
     height: 60px;
   }

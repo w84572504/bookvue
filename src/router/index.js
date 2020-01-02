@@ -10,7 +10,12 @@ const HomeIndex = () => import('views/index/Home');
 const Index = () => import('views/index/Index');
 const Stroy = () => import('views/index/Story');
 const Rember = () => import('views/index/Rember');
+
 const About = () => import('views/index/About');
+const SetUser = () => import('views/index/about/SetUser');
+const Rechage = () => import('views/index/about/Rechage');
+const TuiJian = () => import('views/index/about/TuiJian');
+const Us = () => import('views/index/about/Us');
 
 const Weixin = () => import('views/weixin/Index');
 const Author = () => import('views/author/Author');
@@ -65,6 +70,42 @@ const routes = [
           title: "关于你"
         },
       },
+      {
+        path:'about/setuser',
+        name: 'setuser',
+        component:SetUser,
+        meta: {
+          islogin: true,
+          title: "设置"
+        },
+      },
+      {
+        path: 'about/rechage',
+        name: 'rechage',
+        component: Rechage,
+        meta: {
+          islogin: true,
+          title: "左钻充值"
+        },
+      },
+      {
+        path:'about/tuijian',
+        name: 'tuijian',
+        component:TuiJian,
+        meta: {
+          islogin: true,
+          title: "推荐有礼"
+        },
+      },
+      {
+        path: 'about/us',
+        name: 'us',
+        component: Us,
+        meta: {
+          islogin: true,
+          title: "关于左巷"
+        },
+      }
     ],
   },
   {

@@ -20,7 +20,6 @@ export function request(config) {
         loadingType: 'spinner'
       });
     }
-
     let str = {};
     if (config.method === 'get' && config.params !== undefined){
       str =config.params

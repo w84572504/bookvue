@@ -79,7 +79,7 @@
   .time{
     padding-top: 20px;
     font-size:15px;
-    font-family:PingFangSC-Semibold,PingFang SC;
+    font-family:PingFangSC-Regular,PingFang SC;
     font-weight:600;
     color:rgba(37,31,31,1);
   }

@@ -64,7 +64,7 @@
         float: left;
         font-size: 16px;
         margin: 0  10px;
-        font-family:PingFangSC-Light,PingFang SC;
+        font-family:PingFangSC-Regular,PingFang SC;
         font-weight:300;
         color:#605C5C;
     }

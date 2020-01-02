@@ -4,7 +4,8 @@
 }
 @font-face {
   font-family: PingFangSC-Regular ;
-  src: url("../fonts/PingFangSC-Regular.ttf");
+  src: url("../fonts/PingFangSC-Regular.woff2");
+  /*src: url("../fonts/PingFangSC-Regular.ttf");*/
 }
 @font-face {
   font-family: PingFangSC-Ultralight ;
