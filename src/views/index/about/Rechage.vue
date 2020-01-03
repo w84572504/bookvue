@@ -82,7 +82,7 @@
         if (this.onid == 0){
           this.$toast.fail('选择支付金额！');
         }
-        payMoney(this.onid,0).then(res=>{
+        payMoney(0,0,this.onid).then(res=>{
           console.log(res);
         })
       }

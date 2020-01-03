@@ -129,10 +129,40 @@ export function rechagelist() {
   return request(headCode)
 }
 
-export function payMoney(id,type) {
-  let data ={'id':id,'type':type};
+export function payMoney(type,id,money) {
+  let data ={'id':id,'type':type,money};
   let headCode = {
     url: 'api/payMoney',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
+export function about(id) {
+  let data ={'id':id,};
+  let headCode = {
+    url: 'api/about',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
+export function getauthor(id) {
+  let data ={'id':id,};
+  let headCode = {
+    url: 'api/getauthor',
+    method: 'post',
+    data: Qs.stringify(data)
+  }
+  return request(headCode)
+}
+
+export function goodauthor(id) {
+  let data ={'id':id,};
+  let headCode = {
+    url: 'api/goodauthor',
     method: 'post',
     data: Qs.stringify(data)
   }
