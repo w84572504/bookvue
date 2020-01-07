@@ -32,6 +32,21 @@
         <span>长按图片保存到本地</span>
       </p>
     </van-popup>
+    <van-popup v-model="show_ok">
+      <div  class="alertpay">
+        <p class="ptit">支付成功</p>
+        <p class="midcon okmid"><span class="iconfont icon-chenggong " ></span></p>
+        <div style="clear: both"></div>
+        <div class="ftbtn">
+          <van-row justify="center" type="flex" class="list-li">
+            <van-col span="12" >
+              <button class="alertbtn surepay" @click="close()">好的</button>
+            </van-col>
+          </van-row>
+
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -44,10 +59,13 @@
         img:"",
         show:false,
         data:[],
-        onid:0
+        onid:0,
+        show_ok:false
       }
     },
     created(){
+      this.$wxShare('',()=>{
+      })
       this._rechagelist()
     },
     methods:{
@@ -69,7 +87,6 @@
           }else{
             this.$toast("获取列表失败！")
           }
-          console.log(res);
         })
       },
       isActive(i){
@@ -81,10 +98,35 @@
       zhifu(){
         if (this.onid == 0){
           this.$toast.fail('选择支付金额！');
+        }else {
+          payMoney(0,0,this.onid).then(res=>{
+            if(res.code == 200){
+              let config = res.msg.config
+              this.onBridgeReady(config)
+            }
+          })
         }
-        payMoney(0,0,this.onid).then(res=>{
-          console.log(res);
-        })
+
+      },
+      onBridgeReady(config){
+        let that = this
+        WeixinJSBridge.invoke(
+          'getBrandWCPayRequest', {
+            "appId":config.appId,     //公众号名称，由商户传入
+            "timeStamp":config.timeStamp,         //时间戳，自1970年以来的秒数
+            "nonceStr":config.nonceStr, //随机串
+            "package":config.package,
+            "signType":config.signType,         //微信签名方式：
+            "paySign":config.paySign //微信签名
+          },
+          function(res){
+            if(res.err_msg == "get_brand_wcpay_request:ok" ){
+              that.show_ok = true
+            }
+          });
+      },
+      close(){
+        this.show_ok=false
       }
     },
   }
@@ -163,4 +205,48 @@
     background-color: #000000;
     color: #ffffff;
   }
+
+  .alertpay{
+    width: 18rem;
+    border-radius: 10px;
+  }
+  .ptit{
+    font-size: 16px;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+  }
+  .midcon{
+    font-size:50px;
+    font-weight: bold;
+    font-family:PingFangSC-Regular,PingFang SC;
+    font-weight:400;
+    color:rgba(48,48,48,1);
+    text-align: center;
+    padding-top: 10px;
+  }
+  .midcon span{
+    font-size: 100px;
+  }
+  .ftbtn{
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .alertbtn{
+    border:none;
+    color: #fff;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    border-radius:4px;
+  }
+  .surepay{
+    background-color: #303030;
+    width:150px;
+    height:36px;
+
+  }
+  .okmid{
+    padding: 50px 0;
+  }
+
 </style>

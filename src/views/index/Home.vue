@@ -15,6 +15,10 @@
     components:{
       tabBar
     },
+    created(){
+      this.$wxShare('',()=>{
+      })
+    }
   }
 </script>
 

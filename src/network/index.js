@@ -130,7 +130,7 @@ export function rechagelist() {
 }
 
 export function payMoney(type,id,money) {
-  let data ={'id':id,'type':type,money};
+  let data ={'id':id,'type':type,'money':money};
   let headCode = {
     url: 'api/payMoney',
     method: 'post',

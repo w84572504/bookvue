@@ -41,7 +41,9 @@ export function request(config) {
     Toast.clear()
     if (res.data.code == 100 || res.data.code == 101){
       store.commit('logout')
+      window.location.reload()
     }
+
     return res.data
     }, err =>{
     store.commit('hideLoading')

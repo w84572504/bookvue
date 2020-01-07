@@ -170,7 +170,6 @@
             },
             getwx(info){
                 getauthor(info.id).then(res=>{
-                    console.log(res);
                     if (res.code == 200){
                         if (res.msg.status == 1){
                             this.author = res.msg.author
@@ -195,13 +194,11 @@
                     money = this.money
                 }
                 payMoney(type,this.info.id,money).then(res=>{
-                    if (res.code == 200){
-                        if (type == 2){
-                            this.show_pay = false
-                        }
-                        this.show_ok = true
+                    if(res.code == 200){
+                        this.close()
+                        let config = res.msg.config
+                        this.onBridgeReady(config,type)
                     }
-                    console.log(res);
                 })
             },
             close(){
@@ -216,6 +213,39 @@
             },
             clickgezi(i){
                 this.shangid = i;
+            },
+            onBridgeReady(config,type){
+                let that = this
+                WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest', {
+                        "appId":config.appId,     //公众号名称，由商户传入
+                        "timeStamp":config.timeStamp,         //时间戳，自1970年以来的秒数
+                        "nonceStr":config.nonceStr, //随机串
+                        "package":config.package,
+                        "signType":config.signType,         //微信签名方式：
+                        "paySign":config.paySign //微信签名
+                    },
+                    function(res){
+                        if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                            if (type == 2){
+                                that.okmsg = '支付成功';
+                                that.show_pay = false
+                            }else{
+                                that.okmsg = '打赏成功';
+                                that.show_list = false
+                            }
+                            that.show_ok = true
+                        }else{
+                            if (type == 2){
+                                that.okmsg = '支付失败';
+                                that.show_pay = false
+                            }else{
+                                that.okmsg = '打赏失败';
+                                that.show_list = false
+                            }
+                            that.show_err = true
+                        }
+                    });
             },
         }
     }

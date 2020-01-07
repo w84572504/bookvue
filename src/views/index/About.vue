@@ -85,6 +85,8 @@
             }
         },
         created(){
+            this.$wxShare('',()=>{
+            })
             this._getuser()
         },
         methods:{

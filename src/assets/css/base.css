@@ -1,5 +1,5 @@
 @import url('./main.css');
-@import url('./font.css');
+/*@import url('./font.css');*/
 @import url('./iconfont.css');
 :root {
   --color-text :#1a1a1a;
@@ -10,7 +10,9 @@
   --line-height:1.5;
   --cube-size: 10px;
 }
-
+[v-cloak]{
+  display: none;
+}
 *,
 *::before,
 *::after{
@@ -20,7 +22,7 @@
 }
 
 body {
-  font-family: PingFangSC-Regular ;
+  /*font-family: PingFangSC-Regular ;*/
   user-select: none; /*禁止用户鼠标选中文字图标*/
   -webkit-tap-highlight-color: transparent;/* webkit 是苹果浏览器引擎 tap点击 highlight背景高龄 color颜色，颜色用数值调节*/
   background:var(--color-background);

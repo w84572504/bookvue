@@ -1,5 +1,4 @@
 import {wxconfig} from "network";
-import wx from 'weixin-js-sdk';
 
 function wxshare(obj, callback) {
   let url =  window.location.href
@@ -27,7 +26,7 @@ function shareConfig(obj, callback) {
     wx.updateTimelineShareData({
       title: obj.timelinetitle ? obj.timelinetitle : obj.title, // 分享标题
       link: obj.link, // 分享链接
-      imgUrl: obj.icon ? obj.icon : "", // 分享图标
+      imgUrl: obj.imgUrl ? obj.imgUrl : "", // 分享图标
       success: () => {
         typeof callback === "function" && callback();
       },
@@ -41,7 +40,7 @@ function shareConfig(obj, callback) {
       title: obj.title, // 分享标题
       desc: obj.desc, // 分享描述
       link: obj.link, // 分享链接
-      imgUrl: obj.icon ? obj.icon : "",
+      imgUrl: obj.imgUrl ? obj.imgUrl : "",
       success: () => {
         typeof callback === "function" && callback();
       },

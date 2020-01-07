@@ -25,6 +25,8 @@
       }
     },
     created(){
+      this.$wxShare('',()=>{
+      })
       getShareImgs().then(res=>{
         if (res.code == 200){
           this.img = res.msg.img

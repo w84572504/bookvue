@@ -22,7 +22,6 @@
         this.redirect = this.$route.query.redirect;
         let code  = this.$route.query.code;
         if (code){
-
           this._getOpen(code);
         }else{
           //1.先获取默认跳转的code

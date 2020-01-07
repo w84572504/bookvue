@@ -1,8 +1,8 @@
 <template>
   <div>
     <top-li :data="data" :onid="onid" :time="time" @changeListId="getData" :row="15" class="topli">
-      <div slot="gengxin">
-        <van-col span="6"><p class="time tnum">{{time}}</p> </van-col>
+      <div slot="gengxin" @click="reloads()">
+        <van-col span="6"><p class="time tnum">20:00</p> </van-col>
         <van-col span="3"><p class="time ttext">更新</p></van-col>
       </div>
     </top-li>
@@ -23,6 +23,7 @@
   import {getIndex,getList} from "network/index"
   export default {
     name: "Index",
+    inject: ['reload'],
     components:{
       List,
       topLi,
@@ -37,11 +38,9 @@
         list:[],
       }
     },
-    mounted() {
+    created(){
       this.$wxShare('',()=>{
       })
-    },
-    created(){
       this._getIndex()
     },
     methods:{
@@ -63,6 +62,9 @@
       },
       getData(id){
         this.onid = id;
+      },
+      reloads(){
+        this.reload()
       }
     },
   }

@@ -19,6 +19,8 @@
       }
     },
     created(){
+      this.$wxShare('',()=>{
+      })
       about(1).then(res=>{
         if (res.code == 200){
           console.log(res);
